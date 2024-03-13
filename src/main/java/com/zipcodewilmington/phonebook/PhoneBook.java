@@ -12,7 +12,7 @@ import java.util.*;
  */
 public class PhoneBook {
 
-    private final Map<String, ArrayList<String>> phonebook;
+    private final Map<String, List<String>> phonebook;
 
     public PhoneBook(Map<String, List<String>> map)
     {
@@ -26,27 +26,34 @@ public class PhoneBook {
     }
 
     public void add(String name, String phoneNumber) {
-        if (hasEntry(name)){
-            ArrayList<String> phNumbers =  phonebook.get(name);
-            phNumbers.add(phoneNumber);
-        }
-        else {
-            phonebook.put(name, new ArrayList<>(Collections.singleton(phoneNumber)));
+//        if (hasEntry(name)){
+//            ArrayList<String> phNumbers =  phonebook.get(name);
+//            phNumbers.add(phoneNumber);
+//        }
+//        else {
+        List<String> arr = new ArrayList<>();
+        arr.add(phoneNumber);
+        this.phonebook.put(name, arr);
+        //phonebook.put(name, new ArrayList<>(Collections.singleton(phoneNumber)));
             //phonebook.put(name, new ArrayList<String>());
         }
-    }
+
 
     public void addAll(String name, String... phoneNumbers)
     {
-        if (hasEntry(name))
-        {
-            ArrayList<String> phNumbers = phonebook.get(name);
-            phNumbers.addAll(Arrays.asList(phoneNumbers));
-        }
-        else
-        {
-            //phonebook.put(name, Arrays.asList(phoneNumbers));
-        }
+        List newPhoneNumbers = Arrays.asList(phoneNumbers);
+        this.phonebook.put(name, newPhoneNumbers);
+//        if (hasEntry(name))
+//        {
+//            ArrayList<String> phNumbers = phonebook.get(name);
+//            phNumbers.addAll(Arrays.asList(phoneNumbers));
+//        }
+//        else
+//        {
+//            ArrayList<String> stList = new ArrayList<String>();
+//            //stList = Arrays.asList(phoneNumbers);
+//            phonebook.put(name, stList);
+//        }
     }
 
     public void remove(String name)
@@ -71,7 +78,7 @@ public class PhoneBook {
 
     public String reverseLookup(String phoneNumber)
     {
-       for (Map.Entry<String, ArrayList<String>> phBookEntry : phonebook.entrySet()){
+       for (Map.Entry<String, List<String>> phBookEntry : phonebook.entrySet()){
            if (phBookEntry.getValue().contains(phoneNumber)){
                return phBookEntry.getKey();
            }
@@ -81,15 +88,18 @@ public class PhoneBook {
 
     public List<String> getAllContactNames()
     {
-        List<String> names = new ArrayList<>();
-        for (Map.Entry<String, ArrayList<String>> phBookEntry : phonebook.entrySet())
+
+        List<String> names = new List<>();
+        for (Map.Entry<String, List<String>> phBookEntry : phonebook.entrySet())
         {
             names.add(phBookEntry.getKey());
         }
+
         return names;
     }
 
-    public Map<String, ArrayList<String>> getMap() {
+    public Map<String, List<String>> getMap()
+    {
         return phonebook;
     }
 }
