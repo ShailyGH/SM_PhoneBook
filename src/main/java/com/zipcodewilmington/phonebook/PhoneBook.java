@@ -16,12 +16,12 @@ public class PhoneBook {
 
     public PhoneBook(Map<String, List<String>> map)
     {
-        this.phonebook = new HashMap<>();
+        this.phonebook = new LinkedHashMap<>();
     }
 
     public PhoneBook()
     {
-        phonebook = new HashMap<>();
+        phonebook = new LinkedHashMap<>();
         //this(null);
     }
 
@@ -88,13 +88,11 @@ public class PhoneBook {
 
     public List<String> getAllContactNames()
     {
-
-        List<String> names = new List<>();
+        ArrayList<String> names = new ArrayList<>();
         for (Map.Entry<String, List<String>> phBookEntry : phonebook.entrySet())
         {
             names.add(phBookEntry.getKey());
         }
-
         return names;
     }
 
